@@ -1,0 +1,8 @@
+[general]
+ignore=B6, T3
+
+[title-match-regex]
+regex = ^(feat:|fix:|chore:|test:|docs:|refactor:).*
+
+[title-min-length]
+min-length = 3
