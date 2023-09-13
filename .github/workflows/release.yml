@@ -1,0 +1,32 @@
+name: Build go-diff
+
+on:
+    push:
+        branches:
+            - release/**
+permissions:
+    contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Config git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch
+          git pull
+      - name: Git tag
+        run: |
+          export version=$(git branch --show-current | sed 's:.*/::')
+          git tag -a $version -m $version
+          git push origin --tags
+      - name: Generate Changelog
+        run: |
+          docker run -v "$PWD":/workdir quay.io/git-chglog/git-chglog:latest -o CHANGELOG.md
+          git add .
+          git commit -am "Chore: generate changelog"
+          git push
