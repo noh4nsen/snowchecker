@@ -1,6 +1,7 @@
 package main
 
 type Config struct {
+	filepath                        string
 	Env                             string                                `hcl:"env"`
 	Region                          string                                `hcl:"region"`
 	Profile                         string                                `hcl:"profile"`
