@@ -1,0 +1,4 @@
+- id: snowchecker
+  name: snowchecker
+  entry: snowchecker
+  language: golang
