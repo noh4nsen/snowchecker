@@ -17,6 +17,8 @@ type Config struct {
 	Warehouse                       map[string]WarehouseDetail            `hcl:"warehouse"`
 	DataSource                      map[string]DataSourceDetail           `hcl:"data_source"`
 	DataMart                        map[string]DataMartDetail             `hcl:"data_mart"`
+	CommonDatabase                  map[string]CommonDatabaseDetail       `hcl:"common_database"`
+	Workspace                       map[string]WorkspaceDetail            `hcl:"workspace"`
 	ServiceNetworkPolicy            map[string]ServiceNetworkPolicyDetail `hcl:"service_network_policy"`
 	AccountNetworkPolicyAllowedCidr []string                              `hcl:"account_network_policy_allowed_cidr"`
 	AccountNetworkPolicyBlockedCidr []string                              `hcl:"account_network_policy_blocked_cidr"`
@@ -64,6 +66,18 @@ type DataMartDetail struct {
 	TeamDeveloper      []string `cty:"relationship_team_developer"`
 	TeamConsumer       []string `cty:"relationship_team_consumer"`
 	TeamAnalyst        []string `cty:"relationship_team_analyst"`
+}
+
+type CommonDatabaseDetail struct {
+	Schema string `cty:"schema_name"`
+}
+
+type WorkspaceDetail struct {
+	Name                      string   `cty:"name"`
+	RelationshipTeamReader    []string `cty:"relationship_team_reader"`
+	RelationshipTeamWriter    []string `cty:"relationship_team_writer"`
+	RelationshipServiceReader []string `cty:"relationship_service_reader"`
+	RelationshipServiceWriter []string `cty:"relationship_service_writer"`
 }
 
 type ServiceNetworkPolicyDetail struct {
